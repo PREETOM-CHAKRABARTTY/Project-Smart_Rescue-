@@ -1,4 +1,4 @@
-## ECE-1204_2410049_Lab Reports
+## Project Submission
 <div align="center">
   
 _**Heaven’s Light is Our Guide**_
