@@ -49,7 +49,7 @@ _**Heaven’s Light is Our Guide**_
 
 | No. | Title | Link | 
 | :---: | :---: | :---: | 
-| 01 | Project details | [details]()
+| 01 | Project details | [details](https://github.com/PREETOM-CHAKRABARTTY/Project-Smart_Rescue-/blob/main/Project/Project_details.md)
 
 </div>
 
