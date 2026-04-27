@@ -50,7 +50,7 @@ _**Heaven’s Light is Our Guide**_
 | No. | Title | Link | 
 | :---: | :---: | :---: | 
 | 01 | Project details | [details](https://github.com/PREETOM-CHAKRABARTTY/Project-Smart_Rescue-/blob/main/Project/Project_details.md)
-| 02 | YouTube video links | [yt_links]()
+| 02 | YouTube video links | [yt_links](https://github.com/PREETOM-CHAKRABARTTY/Project-Smart_Rescue-/blob/main/Project/YouTube_video_links.md)
 
 </div>
 
