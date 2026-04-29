@@ -2,6 +2,9 @@
 ```C++
 #include<iostream>
 #include<string>
+#include<cmath>
+#include<fstream>
+#include<sstream>
 
 using namespace std;
 
@@ -272,6 +275,45 @@ void MatchFromFile(MatchSystem &Foundobj)
     {
         cout << "No suitable match is found." << endl;
     }
+}
+
+// Main
+int main() {
+    cout << "=====Smart Rescue System=====" << endl;
+    cout << "1. Add missing person." << endl;
+    cout << "2. Match found person." << endl;
+    cout << "3. Exit program." << endl;
+    cout << "enter your choice : " ;
+    
+
+    int choice;
+    cin >> choice;
+
+    MatchSystem missingObj, foundObj;
+    switch(choice)
+    {
+        case 1: 
+        {
+            inputFamily(missingObj);
+            break;
+        }
+        case 2:
+        {
+            inputRescuer(foundObj);
+            MatchFromFile(foundObj);
+            break;
+        }
+        case 3:
+        {
+            break;
+        }
+        default :
+        {
+            cout << "Invalid choice." << endl;
+        }
+    }
+    
+    return 0;
 }
 
 ```
