@@ -46,4 +46,25 @@ public:
         cout << "Mark: " << specialMark << endl;
     }
 };
+
+// =Derived Class 1 = which will take input according to family point of view
+class FamilyPov : virtual public Person {
+protected:
+    string name;
+    string contact;
+
+public:
+    void display() override
+    {
+        cout << "\n--- Missing Person ---\n";
+        cout << "Name: " << name << endl;
+        cout << "Contact: " << contact << endl;
+        cout << "Age: " << age << endl;
+        cout << "Height: " << height << endl;
+        cout << "Skin: " << skinColor << endl;
+        cout << "Mark: " << specialMark << endl;
+    }
+};
+
+
 ```
