@@ -177,5 +177,101 @@ string chooseMark()
     }
 }
 
+// Friend input for family
+void inputFamily(MatchSystem &f)
+{
+    cout << "\n[Family]\n";
+    cout << "Missing Person's Name : "  ;  cin >> f.name ;
+    cout << "Family Contact        : "  ;  cin >> f.contact ;
+
+    f.age = getAge();
+    f.height = getHeight();
+    f.skinColor = chooseSkin();
+    f.specialMark = chooseMark();
+
+    //saving information to file 
+    ofstream file("missing.csv", ios::app);
+
+    file << f.name << ","
+         << f.contact << ","
+         << f.age << ","
+         << f.height << ","
+         << f.skinColor << ","
+         << f.specialMark << "\n";
+
+    file.close();
+}
+
+// Friend input for rescuer team
+void inputRescuer(MatchSystem &r)
+{
+    cout << "\n[Rescuer]\n";
+    cout << "Location : " ;  
+
+    cin >> r.location ;
+    r.age = getAge();
+    r.height = getHeight();
+    r.skinColor = chooseSkin();
+    r.specialMark = chooseMark();
+}
+
+void MatchFromFile(MatchSystem &Foundobj)
+{
+    ifstream file("missing.csv"); //opening the file to read
+    
+    if(!file)
+    {
+        cout << "File not found!" << endl;
+        return;
+    }
+
+    string line;
+    float bestScore = 0;
+    MatchSystem bestMatch;
+
+    while(getline(file, line))
+    {
+        stringstream ss(line);
+
+        MatchSystem temp;
+        string temstr;
+
+        //now extracting data from each line of csv
+        getline(ss, temp.name, ',');
+        getline(ss, temp.contact, ',');
+        getline(ss, temstr, ',');
+        temp.age = stoi(temstr);
+        getline(ss, temstr, ',');
+        temp.height = stof(temstr);
+        getline(ss, temp.skinColor, ',');
+        getline(ss, temp.specialMark, ',');
+
+        //now, we will calculate the matching score
+        float score = temp.weightedScore(Foundobj);
+
+        //Tracking the best match
+        if(score > bestScore)
+        {
+            bestScore = score;
+            bestMatch = temp;
+        }
+
+    }
+
+    file.close();
+
+    cout << "\n===Final result : ===" << endl;
+
+    if(bestScore >= 50)
+    {
+        cout << "Match Found-" << bestScore << "%" << endl;
+        bestMatch.FamilyPov::display();
+        Foundobj.RescuerPov :: display();
+    } 
+    else
+    {
+        cout << "No suitable match is found." << endl;
+    }
+}
 
 ```
