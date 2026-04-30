@@ -50,18 +50,15 @@ public:
     }
 };
 
-// =Derived Class 1 = which will take input according to family point of view
-class FamilyPov : virtual public Person {
+// =Derived Class 2 = which will take input according to rescuer point of view
+class RescuerPov : virtual public Person {
 protected:
-    string name;
-    string contact;
+    string location;
 
 public:
-    void display() override
-    {
-        cout << "\n--- Missing Person ---\n";
-        cout << "Name: " << name << endl;
-        cout << "Contact: " << contact << endl;
+    void display() override {
+        cout << "\n--- Found Person ---\n";
+        cout << "Location: " << location << endl;
         cout << "Age: " << age << endl;
         cout << "Height: " << height << endl;
         cout << "Skin: " << skinColor << endl;
