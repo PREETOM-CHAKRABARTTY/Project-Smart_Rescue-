@@ -277,12 +277,242 @@ void MatchFromFile(MatchSystem &Foundobj)
     }
 }
 
+
+
+//Feature no 02
+
+bool ExceptionHandling();
+
+//Main base class holding all necessary information
+class Medical_Info{
+protected:
+    bool unconscious;
+    bool breathing;
+    bool bleeding;
+    bool bluelips;
+    bool coughing;
+    bool coldPale;
+    bool pain;
+public:
+    Medical_Info()
+    {
+        unconscious = bleeding = bluelips =
+        coughing = coldPale = pain = false;
+
+        breathing = true; 
+    }
+
+};
+
+//Deriving a class which will show probable risks victim might have
+class RiskProvider : virtual public Medical_Info{
+public:
+    virtual void displayRisks() = 0;
+};
+
+//This class is designed to show actions that rescuser should take
+class ActionProvider : virtual public Medical_Info{
+public: 
+    virtual void displayActions() = 0;
+};
+
+//That is our brain class that calculates everything
+class Victim_condition : public RiskProvider, public ActionProvider{
+public:
+    friend void TakingInput(Victim_condition &vc);
+
+    void displayRisks() override{
+        int num = 1;
+        if(unconscious)
+        {
+            cout << num << ". Head injury." << endl;
+            num += 1;
+        }
+        if(breathing == false)
+        {
+            cout << num << ". Respiratory failure." << endl;
+            num += 1;
+        }
+        if(bleeding)
+        {
+            cout << num << ". Severe blood loss." << endl;
+            num += 1;
+        }
+        if(pain)
+        {
+            cout << num << ". Bone injury." << endl;
+            num += 1;
+        }
+        if(coldPale)
+        {
+            cout << num << ". Hipothermia." << endl;
+            num += 1;
+        }
+        if(coughing)
+        {
+            cout << num << ". Smoke inhalation." << endl;
+            num += 1;
+        }
+        if(bluelips)
+        {
+            cout << num << ". Oxygen deprivation" << endl;
+            num += 1;
+        }
+    }
+
+    void displayActions() override{
+        int num = 1;
+        if(unconscious)
+        {
+            cout << num << ". Call medical team immediately." << endl;
+            num += 1;
+            cout << num << ". Do not give food or water." << endl;
+            num += 1;
+        }
+        if(breathing == false)
+        {
+            cout << num << ". Begin CPR if trained." << endl;
+            num += 1;
+            cout << num << ". Loosen tight clothing." << endl;
+            num += 1;
+        }
+        if(bleeding)
+        {
+            cout << num << ". Apply firm pressure on wound." << endl;
+            num += 1;
+        }
+        if(pain)
+        {
+            cout << num << ". Don't Move injured limb." << endl;
+            num += 1;
+        }
+        if(coldPale)
+        {
+            cout << num << ". Keep victim warm using blankets or clothing" << endl;
+            num += 1;
+        }
+        if(coughing)
+        {
+            cout << num << ". Avoid giving water if coughing heavily" << endl;
+            num += 1;
+            cout << num << ". Move victim to fresh air." << endl;
+            num += 1;
+        }
+        if(bluelips)
+        {
+           cout << num << ". Give immediate oxygen support." << endl;
+           num += 1;
+        }
+    }
+};
+
+
+void TakingInput(Victim_condition &vc)
+{
+    cout << "1. Is victim unconscious?(yes or no)" << endl;
+    vc.unconscious = ExceptionHandling();
+
+    cout << "2. Is the victim breathing?(yes or no)" << endl;
+    vc.breathing = ExceptionHandling();
+
+    cout << "3. Is there heavy bleeding?(yes or no)" << endl;
+    vc.bleeding = ExceptionHandling();
+
+    cout << "4. Has extreme pain while moving?(yes or no)" << endl;
+    vc.pain = ExceptionHandling();
+
+    cout << "5. Is victim cold, pale, confused or shaking?(yes or no)" << endl;
+    vc.coldPale = ExceptionHandling();
+
+    cout << "6. Badly coughing or has black mark around mouth?(yes or no)" << endl;
+    vc.coughing = ExceptionHandling();
+
+    cout << "7. Have blue or purple lips/ figertips?(yes or no)" << endl;
+    vc.bluelips = ExceptionHandling();
+
+}
+
+//here we calculate the severity level
+class MedicalReport : public Victim_condition{
+private:
+    int HighRisks;
+public:
+/*we calculated non critical symptoms
+for accurately determine the severity level */
+
+    void calculatingNonCriticalSymptoms()
+    {
+        HighRisks = bleeding + pain + coldPale + coughing;
+    }
+
+    void calculateSeverity ()
+    {
+        cout << endl;
+        if(unconscious || breathing == false || bluelips)
+        {
+            cout << "===Victim status : Critical!(Has life threat! Need emergency help)" << endl;
+        }
+
+        else if(HighRisks >= 2)
+        {
+           cout << "===Victim status : Severe!(Not free from risk)\n" << endl; 
+        }
+
+        else if(HighRisks == 1)
+        {
+            cout << "===Victim status : Moderate!(Free from risk.)\n" << endl;
+        }
+
+        else
+        {
+            cout <<"===Victim status : Safe\n" << endl;
+        }
+
+    }
+};
+
+
+//Exceptions are handled here
+bool ExceptionHandling()
+{
+    string input;
+
+    while(1)
+    {
+        try {
+            cin >> input ;
+
+            if(input != "yes" && input != "no")
+            {
+                throw "Invalid input. Please enter yes or no";
+            }
+            
+            if(input == "yes")
+            {
+                return 1;
+            }
+            if(input == "no")
+            {
+                return 0;
+            }
+        }
+
+        catch(const char* msg)
+        {
+            cout << msg << endl;
+            cout << "Try again : " << endl;
+        }
+    }
+
+}
+
+
 // Main
 int main() {
     cout << "=====Smart Rescue System=====" << endl;
     cout << "1. Add missing person." << endl;
     cout << "2. Match found person." << endl;
-    cout << "3. Exit program." << endl;
+    cout << "3. Exit feature 01." << endl;
     cout << "enter your choice : " ;
     
 
@@ -295,7 +525,7 @@ int main() {
         case 1: 
         {
             inputFamily(missingObj);
-            break;
+            return 0;
         }
         case 2:
         {
@@ -312,8 +542,49 @@ int main() {
             cout << "Invalid choice." << endl;
         }
     }
+
+    //For feature 02
+    cout << endl;
+    cout << "===You are at Medical gudiance section :===" << endl;
+    MedicalReport OMR;
+
+    TakingInput(OMR);
+    OMR.calculatingNonCriticalSymptoms();
+    OMR.calculateSeverity();
+
+    cout << "===Probable risks : ===" << endl;
+    OMR.displayRisks();
+    cout << endl;
+
+    cout << "===Imediate actions : ===" << endl;
+    OMR.displayActions();
+
     
     return 0;
 }
 
 ```
+
+
+## *Output screenshots :* 
+
+<p align="center">
+<img alt="2310012_lab2_prob_1" src="https://github.com/user-attachments/assets/eb6f3424-0bcf-451e-98db-0758dc4943dc">
+</p>
+
+
+<p align="center">
+<img alt="2310012_lab2_prob_1" src="https://github.com/user-attachments/assets/978cd9d9-2e74-4c4a-b4fd-1287345219b9">
+</p>
+
+
+<p align="center">
+<img alt="2310012_lab2_prob_1" src="https://github.com/user-attachments/assets/088a25d6-2964-4931-8311-c9cbca0df100">
+</p>
+
+
+<p align="center">
+<img alt="2310012_lab2_prob_1" src="https://github.com/user-attachments/assets/b5ae923c-4aac-44d6-b267-b2b7bf4a74df">
+</p>
+
+
