@@ -6,5 +6,5 @@ Here is my [YouTube link](https://codeforces.com/submissions/Preetom-Chakrabartt
 
 ## *YouTube link by 2410049*
 <div align="justify">
-Here is my [YouTube link](https://codeforces.com/submissions/Preetom-Chakrabartty).
+Here is my [YouTube link](https://youtu.be/snVDrVz8weA).
 </div>
