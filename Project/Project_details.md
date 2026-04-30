@@ -20,3 +20,18 @@ It has two features, first feature “Find Victims” helps identify victims by 
 Feature 01 -> Smriti Rani Roy(2410002)
 Feature 02 -> Preetom Kumar Chakrabartty(2410049)
 </div>
+
+## *UML design of feature 01 :* 
+
+<p align="center">
+<img alt="2310012_lab2_prob_1" src="https://github.com/user-attachments/assets/bbd0d3fa-9ac7-4267-b603-a4396d0e55a8">
+</p>
+
+
+## *UML design of feature 02 :* 
+
+<p align="center">
+<img alt="2310012_lab2_prob_1" src="https://github.com/user-attachments/assets/be87a493-840d-4921-b50b-0429e471cd62">
+</p>
+
+
